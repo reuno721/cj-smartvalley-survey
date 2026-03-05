@@ -95,12 +95,12 @@ body {
 
 .hero-card {
   text-align: left;
-  padding: 1.45rem 1.25rem 1.25rem;
+  padding: 1.5rem 1.25rem 1.25rem;
 }
 
 .hero-card p {
-  margin: 0.55rem 0;
-  font-size: 1.08rem;
+  margin: 0.6rem 0;
+  font-size: 1.12rem;
   line-height: 1.65;
 }
 
