@@ -105,6 +105,7 @@ function bindVisitRequestLinks() {
   });
 }
 
+
 function renderFaqAccordion() {
   const container = document.getElementById('faqAccordion');
   if (!container) return;
@@ -143,3 +144,4 @@ function renderFaqAccordion() {
 initializeThemeToggle();
 bindVisitRequestLinks();
 renderFaqAccordion();
+

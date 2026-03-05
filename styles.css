@@ -36,6 +36,7 @@
   --notice-bg: #3b2a31;
   --notice-text: #ffc0c5;
   --focus: #9fcaf2;
+
 }
 
 * {
@@ -51,8 +52,9 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
-  font-size: 19px;
-  line-height: 1.62;
+  font-size: 20px;
+  line-height: 1.7;
+
 }
 
 .container {
@@ -111,6 +113,7 @@ h1 {
 
 .title-line {
   display: block;
+
 }
 
 h2 {
@@ -128,17 +131,20 @@ h2 {
 
 .cta-card {
   margin-top: 1rem;
+
   background: var(--surface-soft);
   border: 1px solid var(--outline);
   border-top: 2px solid var(--line-strong);
   border-radius: 0.36rem;
   padding: 0.82rem;
+
 }
 
 .cta-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+
 }
 
 .btn {
@@ -146,6 +152,7 @@ h2 {
   align-items: center;
   justify-content: center;
   min-height: 56px;
+
   border: 1px solid transparent;
   border-radius: 0.36rem;
   text-align: center;
@@ -200,12 +207,14 @@ h2 {
 
 .card {
   padding: 1.15rem 1.15rem 1.2rem;
+
 }
 
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+
 }
 
 .chip {
@@ -215,6 +224,7 @@ h2 {
   text-align: center;
   font-weight: 700;
   padding: 0.62rem 0.72rem;
+
 }
 
 .steps {
@@ -222,6 +232,7 @@ h2 {
   padding-left: 1.28rem;
   font-size: 1.22rem;
   line-height: 1.62;
+
 }
 
 .accordion-item {
@@ -229,6 +240,7 @@ h2 {
   border-radius: 0.35rem;
   background: var(--surface);
   margin-bottom: 0.62rem;
+
   overflow: hidden;
 }
 
@@ -241,12 +253,14 @@ h2 {
   font-size: 1.04rem;
   font-weight: 800;
   padding: 0.88rem 0.95rem;
+
   cursor: pointer;
 }
 
 .accordion-panel {
   color: var(--muted);
   padding: 0 0.95rem 0.9rem;
+
 }
 
 .accordion-panel[hidden] {
@@ -257,6 +271,7 @@ h2 {
   background: var(--surface);
   border-top: 1px solid var(--outline);
   padding: 1.8rem 0 2rem;
+
 }
 
 .footer-inner {
@@ -273,6 +288,7 @@ h2 {
   margin: 0.4rem 0 0;
   color: var(--muted);
   font-size: 1.03rem;
+
 }
 
 a {
@@ -291,6 +307,7 @@ a {
 @media (max-width: 800px) {
   body {
     font-size: 18px;
+
   }
 
   .theme-toggle {
@@ -305,6 +322,7 @@ a {
   .cta-group {
     grid-template-columns: 1fr;
     gap: 12px;
+
   }
 
   .chip-grid {
@@ -347,5 +365,6 @@ a {
     background: #ffffff;
     color: #111111;
     border-color: #999999;
+
   }
 }
