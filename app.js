@@ -1,6 +1,12 @@
 const FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdlyYnAo4j7Lf_UEwhpyRmY6HLZXGY3tLlSs1UmP0rtIhus1Q/viewform?usp=publish-editor';
 
+codex/implement-static-website-for-survey-guide-7cyoxx
+const THEME_STORAGE_KEY = 'preferred-theme';
+const root = document.documentElement;
+const themeToggleButton = document.getElementById('themeToggle');
+
+
 const faqData = [
   {
     q: 'Q1. 지장물 조사가 무엇인가요?',
@@ -56,8 +62,45 @@ const faqData = [
   }
 ];
 
-function bindFormLinks() {
+codex/implement-static-website-for-survey-guide-7cyoxx
+function getSystemPreferredTheme() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function setTheme(theme) {
+  root.dataset.theme = theme;
+
+  if (themeToggleButton) {
+    const isDark = theme === 'dark';
+    themeToggleButton.textContent = isDark ? '☀️' : '🌙';
+    themeToggleButton.setAttribute('aria-label', isDark ? '라이트 모드로 전환' : '다크 모드로 전환');
+  }
+}
+
+function initializeThemeToggle() {
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  const initialTheme = storedTheme || getSystemPreferredTheme();
+  setTheme(initialTheme);
+
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener('click', () => {
+      const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    });
+  }
+
+  const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  systemThemeMedia.addEventListener('change', () => {
+    if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+      setTheme(getSystemPreferredTheme());
+    }
+  });
+}
+
+function bindVisitRequestLinks() {
   const links = [document.getElementById('visitRequestBtn'), document.getElementById('visitRequestBtnBottom')];
+
   links.forEach((link) => {
     if (link) {
       link.href = FORM_URL;
@@ -65,40 +108,43 @@ function bindFormLinks() {
   });
 }
 
-function createFaqAccordion() {
-  const root = document.getElementById('faqAccordion');
-  if (!root) return;
+codex/implement-static-website-for-survey-guide-7cyoxx
+function renderFaqAccordion() {
+  const container = document.getElementById('faqAccordion');
+  if (!container) return;
 
-  faqData.forEach((item, idx) => {
-    const itemEl = document.createElement('article');
-    itemEl.className = 'accordion-item';
+  faqData.forEach((item, index) => {
+    const article = document.createElement('article');
+    article.className = 'accordion-item';
 
-    const trigger = document.createElement('button');
-    trigger.className = 'accordion-trigger';
-    trigger.type = 'button';
-    trigger.id = `faq-trigger-${idx}`;
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.setAttribute('aria-controls', `faq-panel-${idx}`);
-    trigger.textContent = item.q;
+    const button = document.createElement('button');
+    button.className = 'accordion-trigger';
+    button.type = 'button';
+    button.id = `faq-trigger-${index}`;
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', `faq-panel-${index}`);
+    button.textContent = item.q;
 
     const panel = document.createElement('div');
     panel.className = 'accordion-panel';
-    panel.id = `faq-panel-${idx}`;
+    panel.id = `faq-panel-${index}`;
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-labelledby', trigger.id);
+    panel.setAttribute('aria-labelledby', button.id);
     panel.hidden = true;
     panel.textContent = item.a;
 
-    trigger.addEventListener('click', () => {
-      const expanded = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', String(!expanded));
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
       panel.hidden = expanded;
     });
 
-    itemEl.append(trigger, panel);
-    root.append(itemEl);
+    article.append(button, panel);
+    container.append(article);
   });
 }
 
-bindFormLinks();
-createFaqAccordion();
+initializeThemeToggle();
+bindVisitRequestLinks();
+renderFaqAccordion();
+

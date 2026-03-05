@@ -1,11 +1,43 @@
 :root {
-  --bg: #f4f6f8;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  color-scheme: light;
+  --bg: #f2f5f8;
   --surface: #ffffff;
-  --text: #222831;
-  --muted: #4f5965;
-  --primary: #3a4b5f;
-  --primary-dark: #2f3d4d;
-  --outline: #d4dae1;
+  --surface-soft: #f8fafc;
+  --text: #1f2732;
+  --muted: #556272;
+  --outline: #d3dbe5;
+  --line-strong: #bec9d6;
+  --primary: #3c4f66;
+  --primary-hover: #324356;
+  --accent: #4a6079;
+  --accent-hover: #40546a;
+  --ghost-bg: #edf2f6;
+  --ghost-border: #c6d0dc;
+  --notice-bg: #f8ecee;
+  --notice-text: #8f2230;
+  --focus: #2b6797;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #151a20;
+  --surface: #1f252d;
+  --surface-soft: #252d37;
+  --text: #ecf2f8;
+  --muted: #c2ccd8;
+  --outline: #364151;
+  --line-strong: #556478;
+  --primary: #647a94;
+  --primary-hover: #6f86a3;
+  --accent: #738ca8;
+  --accent-hover: #809bb9;
+  --ghost-bg: #2a3340;
+  --ghost-border: #526071;
+  --notice-bg: #3b2a31;
+  --notice-text: #ffc0c5;
+  --focus: #9fcaf2;
+
 }
 
 * {
@@ -20,9 +52,11 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  font-family: 'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
   font-size: 18px;
-  line-height: 1.7;
+  line-height: 1.55;
+
 }
 
 .container {
@@ -31,136 +65,202 @@ body {
 }
 
 .hero {
-  background: var(--surface);
-  border-bottom: 1px solid var(--outline);
-  padding: 1.25rem 0 2rem;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  padding: 1rem 0 1.45rem;
 }
 
-.contact-top {
-  margin: 0 0 0.5rem;
-  font-weight: 700;
+.hero .container {
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  border: 1px solid var(--outline);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hero-card,
+.card {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-top: 2px solid var(--line-strong);
+  border-radius: 0.45rem;
+}
+
+.hero-card {
+  text-align: center;
+  padding: 1.3rem 1.1rem 1.1rem;
+}
+
+.hero-card p {
+  margin: 0.45rem 0;
 }
 
 h1 {
-  margin: 0.2rem 0 1rem;
-  font-size: clamp(1.75rem, 4.4vw, 2.6rem);
-  line-height: 1.3;
+  margin: 0.1rem 0 0.9rem;
+  font-size: clamp(1.72rem, 4.2vw, 2.45rem);
+  line-height: 1.28;
 }
 
 h2 {
-  margin: 0 0 0.9rem;
-  font-size: clamp(1.35rem, 3.2vw, 1.9rem);
-  line-height: 1.35;
+  margin: 0 0 0.72rem;
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  line-height: 1.3;
 }
 
-.notice {
-  margin-top: 0.6rem;
+.notice-box {
+  margin: 0.75rem auto 0;
+  max-width: 720px;
+  border: 1px solid color-mix(in srgb, var(--notice-text) 20%, var(--outline));
+  border-radius: 0.36rem;
+  background: var(--notice-bg);
+  color: var(--notice-text);
   font-weight: 700;
-  color: #8b1f1f;
+  padding: 0.52rem 0.72rem;
 }
 
-.section {
-  padding: 1.6rem 0;
-}
-
-.section .container {
-  background: var(--surface);
+.cta-card {
+  margin-top: 0.9rem;
+  background: var(--surface-soft);
   border: 1px solid var(--outline);
-  border-radius: 0.45rem;
-  padding: 1.1rem 1rem;
+  border-top: 2px solid var(--line-strong);
+  border-radius: 0.36rem;
+  padding: 0.72rem;
+
 }
 
 .cta-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 1.1rem;
+
+  codex/implement-static-website-for-survey-guide-7cyoxx
+  gap: 0.62rem;
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border: 1px solid transparent;
+  border-radius: 0.36rem;
   text-align: center;
   text-decoration: none;
   font-weight: 800;
-  border-radius: 0.35rem;
-  border: 1px solid transparent;
-  padding: 0.88rem 1rem;
-  background: #e4e9ef;
+  padding: 0.8rem 0.9rem;
+  background: var(--ghost-bg);
   color: var(--text);
 }
 
-.btn:focus-visible,
-.accordion-trigger:focus-visible {
-  outline: 3px solid #205a8b;
-  outline-offset: 3px;
-}
-
-.btn-call,
-.btn-form {
+.btn-call {
   background: var(--primary);
   color: #ffffff;
-  border-color: #2d3b4b;
+  border-color: color-mix(in srgb, var(--primary) 70%, #000000);
 }
 
-.btn-call:hover,
+.btn-call:hover {
+  background: var(--primary-hover);
+}
+
+.btn-form {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: color-mix(in srgb, var(--accent) 70%, #000000);
+}
+
 .btn-form:hover {
-  background: var(--primary-dark);
+  background: var(--accent-hover);
 }
 
 .btn-faq {
-  background: #eef1f4;
-  border-color: #c3ccd6;
+  background: var(--ghost-bg);
+  border-color: var(--ghost-border);
 }
 
-.btn.large {
-  margin-top: 0.6rem;
+.btn-large {
+  margin-top: 0.45rem;
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
+}
+
+.btn:focus-visible,
+.theme-toggle:focus-visible,
+.accordion-trigger:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.section {
+  padding: 1.3rem 0;
+}
+
+.card {
+  padding: 0.95rem 0.95rem 1rem;
+
 }
 
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  gap: 0.62rem;
 }
 
 .chip {
-  background: #f8fafb;
-  border: 1px solid #cfd6df;
+  border: 1px solid var(--outline);
   border-radius: 0.35rem;
+  background: var(--surface-soft);
   text-align: center;
   font-weight: 700;
-  padding: 0.65rem 0.8rem;
+  padding: 0.62rem 0.72rem;
+
 }
 
 .steps {
   margin: 0;
-  padding-left: 1.25rem;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  padding-left: 1.24rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 .accordion-item {
-  background: var(--surface);
   border: 1px solid var(--outline);
   border-radius: 0.35rem;
-  margin-bottom: 0.7rem;
+  background: var(--surface);
+  margin-bottom: 0.62rem;
+
   overflow: hidden;
 }
 
 .accordion-trigger {
   width: 100%;
   border: 0;
-  background: #f4f7fa;
-  padding: 0.95rem 1rem;
-  text-align: left;
-  font-size: 1.05rem;
-  font-weight: 800;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  background: var(--surface-soft);
   color: var(--text);
+  text-align: left;
+  font-size: 1.04rem;
+  font-weight: 800;
+  padding: 0.88rem 0.95rem;
+
   cursor: pointer;
 }
 
 .accordion-panel {
-  padding: 0 1rem 1rem;
+codex/implement-static-website-for-survey-guide-7cyoxx
   color: var(--muted);
+  padding: 0 0.95rem 0.9rem;
+
 }
 
 .accordion-panel[hidden] {
@@ -170,15 +270,24 @@ h2 {
 .footer {
   background: var(--surface);
   border-top: 1px solid var(--outline);
-  padding: 1.25rem 0 2rem;
+codex/implement-static-website-for-survey-guide-7cyoxx
+  padding: 1.15rem 0 1.35rem;
+}
+
+.footer-inner {
+  text-align: center;
+}
+
+.footer-contact {
+  margin: 0;
   font-weight: 700;
 }
 
-.footer .container {
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
+.footer-meta {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+
 }
 
 a {
@@ -190,6 +299,17 @@ a {
     font-size: 17px;
   }
 
+codex/implement-static-website-for-survey-guide-7cyoxx
+  .theme-toggle {
+    top: -0.1rem;
+  }
+
+  .hero-card {
+    text-align: left;
+    padding: 1.1rem 0.9rem 0.92rem;
+  }
+
+
   .cta-group {
     grid-template-columns: 1fr;
   }
@@ -199,10 +319,38 @@ a {
   }
 }
 
+codex/implement-static-website-for-survey-guide-7cyoxx
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #151a20;
+    --surface: #1f252d;
+    --surface-soft: #252d37;
+    --text: #ecf2f8;
+    --muted: #c2ccd8;
+    --outline: #364151;
+    --line-strong: #556478;
+    --primary: #647a94;
+    --primary-hover: #6f86a3;
+    --accent: #738ca8;
+    --accent-hover: #809bb9;
+    --ghost-bg: #2a3340;
+    --ghost-border: #526071;
+    --notice-bg: #3b2a31;
+    --notice-text: #ffc0c5;
+    --focus: #9fcaf2;
+  }
+}
+
 @media print {
+  .theme-toggle {
+    display: none;
+  }
+
   .btn {
-    border-color: #999;
-    color: #111;
-    background: #fff;
+    background: #ffffff;
+    color: #111111;
+    border-color: #999999;
+
   }
 }
