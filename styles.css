@@ -52,8 +52,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 20px;
+  line-height: 1.7;
 
 }
 
@@ -94,18 +94,26 @@ body {
 }
 
 .hero-card {
-  text-align: center;
-  padding: 1.3rem 1.1rem 1.1rem;
+  text-align: left;
+  padding: 1.45rem 1.25rem 1.25rem;
 }
 
 .hero-card p {
-  margin: 0.45rem 0;
+  margin: 0.55rem 0;
+  font-size: 1.08rem;
+  line-height: 1.65;
 }
 
 h1 {
-  margin: 0.1rem 0 0.9rem;
+  margin: 0.1rem 0 0.95rem;
   font-size: clamp(1.72rem, 4.2vw, 2.45rem);
   line-height: 1.28;
+  text-align: center;
+}
+
+.title-line {
+  display: block;
+
 }
 
 h2 {
@@ -114,40 +122,37 @@ h2 {
   line-height: 1.3;
 }
 
-.notice-box {
-  margin: 0.75rem auto 0;
-  max-width: 720px;
-  border: 1px solid color-mix(in srgb, var(--notice-text) 20%, var(--outline));
-  border-radius: 0.36rem;
-  background: var(--notice-bg);
+.notice-text {
+  margin: 0.8rem 0 0;
   color: var(--notice-text);
   font-weight: 700;
-  padding: 0.52rem 0.72rem;
+  font-size: 1rem;
 }
 
 .cta-card {
-  margin-top: 0.9rem;
+  margin-top: 1rem;
+
   background: var(--surface-soft);
   border: 1px solid var(--outline);
   border-top: 2px solid var(--line-strong);
   border-radius: 0.36rem;
-  padding: 0.72rem;
+  padding: 0.82rem;
 
 }
 
 .cta-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 
-  codex/implement-static-website-for-survey-guide-7cyoxx
-  gap: 0.62rem;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
+  min-height: 56px;
+
   border: 1px solid transparent;
   border-radius: 0.36rem;
   text-align: center;
@@ -197,19 +202,19 @@ h2 {
 }
 
 .section {
-  padding: 1.3rem 0;
+  padding: 1.45rem 0;
 }
 
 .card {
-  padding: 0.95rem 0.95rem 1rem;
+  padding: 1.15rem 1.15rem 1.2rem;
 
 }
 
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-codex/implement-static-website-for-survey-guide-7cyoxx
-  gap: 0.62rem;
+  gap: 1rem;
+
 }
 
 .chip {
@@ -224,9 +229,10 @@ codex/implement-static-website-for-survey-guide-7cyoxx
 
 .steps {
   margin: 0;
-  padding-left: 1.24rem;
-  font-size: 1.1rem;
-  line-height: 1.5;
+  padding-left: 1.28rem;
+  font-size: 1.22rem;
+  line-height: 1.62;
+
 }
 
 .accordion-item {
@@ -264,7 +270,8 @@ codex/implement-static-website-for-survey-guide-7cyoxx
 .footer {
   background: var(--surface);
   border-top: 1px solid var(--outline);
-  padding: 1.15rem 0 1.35rem;
+  padding: 1.8rem 0 2rem;
+
 }
 
 .footer-inner {
@@ -274,12 +281,13 @@ codex/implement-static-website-for-survey-guide-7cyoxx
 .footer-contact {
   margin: 0;
   font-weight: 700;
+  font-size: 1.16rem;
 }
 
 .footer-meta {
-  margin: 0.45rem 0 0;
+  margin: 0.4rem 0 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1.03rem;
 
 }
 
@@ -287,9 +295,19 @@ a {
   color: inherit;
 }
 
+.visit-cta-wrap {
+  text-align: center;
+}
+
+.visit-section p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
 @media (max-width: 800px) {
   body {
-    font-size: 17px;
+    font-size: 18px;
+
   }
 
   .theme-toggle {
@@ -298,16 +316,21 @@ a {
 
   .hero-card {
     text-align: left;
-    padding: 1.1rem 0.9rem 0.92rem;
+    padding: 1.2rem 0.95rem 1rem;
   }
-
 
   .cta-group {
     grid-template-columns: 1fr;
+    gap: 12px;
+
   }
 
   .chip-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .visit-section p {
+    font-size: 1.04rem;
   }
 }
 
