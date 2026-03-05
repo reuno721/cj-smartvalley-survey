@@ -1,9 +1,11 @@
 const FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdlyYnAo4j7Lf_UEwhpyRmY6HLZXGY3tLlSs1UmP0rtIhus1Q/viewform?usp=publish-editor';
 
+codex/implement-static-website-for-survey-guide-7cyoxx
 const THEME_STORAGE_KEY = 'preferred-theme';
 const root = document.documentElement;
 const themeToggleButton = document.getElementById('themeToggle');
+
 
 const faqData = [
   {
@@ -60,6 +62,7 @@ const faqData = [
   }
 ];
 
+codex/implement-static-website-for-survey-guide-7cyoxx
 function getSystemPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
@@ -105,6 +108,7 @@ function bindVisitRequestLinks() {
   });
 }
 
+codex/implement-static-website-for-survey-guide-7cyoxx
 function renderFaqAccordion() {
   const container = document.getElementById('faqAccordion');
   if (!container) return;
@@ -143,3 +147,4 @@ function renderFaqAccordion() {
 initializeThemeToggle();
 bindVisitRequestLinks();
 renderFaqAccordion();
+

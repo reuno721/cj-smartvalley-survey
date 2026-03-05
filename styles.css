@@ -1,4 +1,5 @@
 :root {
+codex/implement-static-website-for-survey-guide-7cyoxx
   color-scheme: light;
   --bg: #f2f5f8;
   --surface: #ffffff;
@@ -36,6 +37,7 @@
   --notice-bg: #3b2a31;
   --notice-text: #ffc0c5;
   --focus: #9fcaf2;
+
 }
 
 * {
@@ -50,9 +52,11 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+codex/implement-static-website-for-survey-guide-7cyoxx
   font-family: 'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
   font-size: 18px;
   line-height: 1.55;
+
 }
 
 .container {
@@ -61,6 +65,7 @@ body {
 }
 
 .hero {
+codex/implement-static-website-for-survey-guide-7cyoxx
   padding: 1rem 0 1.45rem;
 }
 
@@ -130,11 +135,14 @@ h2 {
   border-top: 2px solid var(--line-strong);
   border-radius: 0.36rem;
   padding: 0.72rem;
+
 }
 
 .cta-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  codex/implement-static-website-for-survey-guide-7cyoxx
   gap: 0.62rem;
 }
 
@@ -197,11 +205,13 @@ h2 {
 
 .card {
   padding: 0.95rem 0.95rem 1rem;
+
 }
 
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+codex/implement-static-website-for-survey-guide-7cyoxx
   gap: 0.62rem;
 }
 
@@ -212,10 +222,12 @@ h2 {
   text-align: center;
   font-weight: 700;
   padding: 0.62rem 0.72rem;
+
 }
 
 .steps {
   margin: 0;
+codex/implement-static-website-for-survey-guide-7cyoxx
   padding-left: 1.24rem;
   font-size: 1.1rem;
   line-height: 1.5;
@@ -226,24 +238,29 @@ h2 {
   border-radius: 0.35rem;
   background: var(--surface);
   margin-bottom: 0.62rem;
+
   overflow: hidden;
 }
 
 .accordion-trigger {
   width: 100%;
   border: 0;
+codex/implement-static-website-for-survey-guide-7cyoxx
   background: var(--surface-soft);
   color: var(--text);
   text-align: left;
   font-size: 1.04rem;
   font-weight: 800;
   padding: 0.88rem 0.95rem;
+
   cursor: pointer;
 }
 
 .accordion-panel {
+codex/implement-static-website-for-survey-guide-7cyoxx
   color: var(--muted);
   padding: 0 0.95rem 0.9rem;
+
 }
 
 .accordion-panel[hidden] {
@@ -253,6 +270,7 @@ h2 {
 .footer {
   background: var(--surface);
   border-top: 1px solid var(--outline);
+codex/implement-static-website-for-survey-guide-7cyoxx
   padding: 1.15rem 0 1.35rem;
 }
 
@@ -269,6 +287,7 @@ h2 {
   margin: 0.45rem 0 0;
   color: var(--muted);
   font-size: 0.9rem;
+
 }
 
 a {
@@ -280,6 +299,7 @@ a {
     font-size: 17px;
   }
 
+codex/implement-static-website-for-survey-guide-7cyoxx
   .theme-toggle {
     top: -0.1rem;
   }
@@ -288,6 +308,7 @@ a {
     text-align: left;
     padding: 1.1rem 0.9rem 0.92rem;
   }
+
 
   .cta-group {
     grid-template-columns: 1fr;
@@ -298,6 +319,7 @@ a {
   }
 }
 
+codex/implement-static-website-for-survey-guide-7cyoxx
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
@@ -329,5 +351,6 @@ a {
     background: #ffffff;
     color: #111111;
     border-color: #999999;
+
   }
 }
