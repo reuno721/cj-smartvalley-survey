@@ -95,7 +95,7 @@ body {
 
 .hero-card {
   text-align: left;
-  padding: 1.5rem 1.25rem 1.25rem;
+  padding: 1.9rem 1.7rem 1.5rem;
 }
 
 .hero-card p {
@@ -299,6 +299,19 @@ a {
   text-align: center;
 }
 
+.visit-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+.visit-cta-grid .btn-large {
+  width: 100%;
+  max-width: none; /* 2열이므로 440 제한 해제 */
+  margin-top: 0.45rem;
+}
+
 .visit-section p {
   font-size: 1.1rem;
   line-height: 1.65;
@@ -316,13 +329,16 @@ a {
 
   .hero-card {
     text-align: left;
-    padding: 1.2rem 0.95rem 1rem;
+    padding: 1.35rem 1.05rem 1.1rem;
   }
 
   .cta-group {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
 
+  .visit-cta-grid {
+    grid-template-columns: 1fr;
   }
 
   .chip-grid {
