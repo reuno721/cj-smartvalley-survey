@@ -1,9 +1,9 @@
 const FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSdlyYnAo4j7Lf_UEwhpyRmY6HLZXGY3tLlSs1UmP0rtIhus1Q/viewform?usp=publish-editor';
 
-const THEME_KEY = 'preferred-theme';
+const THEME_STORAGE_KEY = 'preferred-theme';
 const root = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
+const themeToggleButton = document.getElementById('themeToggle');
 
 const faqData = [
   {
@@ -60,45 +60,44 @@ const faqData = [
   }
 ];
 
-function getSystemTheme() {
+function getSystemPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function updateThemeToggle(theme) {
-  if (!themeToggle) return;
-  const isDark = theme === 'dark';
-  themeToggle.textContent = isDark ? '☀️' : '🌙';
-  themeToggle.setAttribute('aria-label', isDark ? '라이트 모드로 전환' : '다크 모드로 전환');
-}
-
-function applyTheme(theme) {
+function setTheme(theme) {
   root.dataset.theme = theme;
-  updateThemeToggle(theme);
+
+  if (themeToggleButton) {
+    const isDark = theme === 'dark';
+    themeToggleButton.textContent = isDark ? '☀️' : '🌙';
+    themeToggleButton.setAttribute('aria-label', isDark ? '라이트 모드로 전환' : '다크 모드로 전환');
+  }
 }
 
-function initTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY);
-  const initialTheme = savedTheme || getSystemTheme();
-  applyTheme(initialTheme);
+function initializeThemeToggle() {
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  const initialTheme = storedTheme || getSystemPreferredTheme();
+  setTheme(initialTheme);
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener('click', () => {
       const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      applyTheme(nextTheme);
-      localStorage.setItem(THEME_KEY, nextTheme);
+      setTheme(nextTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
     });
   }
 
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  mediaQuery.addEventListener('change', () => {
-    if (!localStorage.getItem(THEME_KEY)) {
-      applyTheme(getSystemTheme());
+  const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  systemThemeMedia.addEventListener('change', () => {
+    if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+      setTheme(getSystemPreferredTheme());
     }
   });
 }
 
-function bindFormLinks() {
+function bindVisitRequestLinks() {
   const links = [document.getElementById('visitRequestBtn'), document.getElementById('visitRequestBtnBottom')];
+
   links.forEach((link) => {
     if (link) {
       link.href = FORM_URL;
@@ -106,41 +105,41 @@ function bindFormLinks() {
   });
 }
 
-function createFaqAccordion() {
-  const rootEl = document.getElementById('faqAccordion');
-  if (!rootEl) return;
+function renderFaqAccordion() {
+  const container = document.getElementById('faqAccordion');
+  if (!container) return;
 
-  faqData.forEach((item, idx) => {
-    const itemEl = document.createElement('article');
-    itemEl.className = 'accordion-item';
+  faqData.forEach((item, index) => {
+    const article = document.createElement('article');
+    article.className = 'accordion-item';
 
-    const trigger = document.createElement('button');
-    trigger.className = 'accordion-trigger';
-    trigger.type = 'button';
-    trigger.id = `faq-trigger-${idx}`;
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.setAttribute('aria-controls', `faq-panel-${idx}`);
-    trigger.textContent = item.q;
+    const button = document.createElement('button');
+    button.className = 'accordion-trigger';
+    button.type = 'button';
+    button.id = `faq-trigger-${index}`;
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', `faq-panel-${index}`);
+    button.textContent = item.q;
 
     const panel = document.createElement('div');
     panel.className = 'accordion-panel';
-    panel.id = `faq-panel-${idx}`;
+    panel.id = `faq-panel-${index}`;
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-labelledby', trigger.id);
+    panel.setAttribute('aria-labelledby', button.id);
     panel.hidden = true;
     panel.textContent = item.a;
 
-    trigger.addEventListener('click', () => {
-      const expanded = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', String(!expanded));
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
       panel.hidden = expanded;
     });
 
-    itemEl.append(trigger, panel);
-    rootEl.append(itemEl);
+    article.append(button, panel);
+    container.append(article);
   });
 }
 
-initTheme();
-bindFormLinks();
-createFaqAccordion();
+initializeThemeToggle();
+bindVisitRequestLinks();
+renderFaqAccordion();
