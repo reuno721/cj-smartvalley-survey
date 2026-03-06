@@ -14,7 +14,8 @@
   --ghost-bg: #edf2f6;
   --ghost-border: #c6d0dc;
   --notice-bg: #f8ecee;
-  --notice-text: #8f2230;
+  --notice-text: #8f2230;  
+  --notice-text2: #1362E4;
   --focus: #2b6797;
 }
 
@@ -34,7 +35,8 @@
   --ghost-bg: #2a3340;
   --ghost-border: #526071;
   --notice-bg: #3b2a31;
-  --notice-text: #ffc0c5;
+  --notice-text: #ffc0c5;  
+  --notice-text2: #ffc0c5;
   --focus: #9fcaf2;
 
 }
@@ -139,6 +141,13 @@ h2 {
   margin: 0.8rem 0 0;
   color: var(--notice-text);
   font-weight: 700;
+  font-size: 1rem;
+}
+
+.notice-text2 {
+  margin: 0.8rem 0 0;
+  color: var(--notice-text);
+  font-weight: 500;
   font-size: 1rem;
 }
 
