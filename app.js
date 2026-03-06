@@ -106,6 +106,14 @@ function bindVisitRequestLinks() {
 }
 
 
+const brandLogo = document.getElementById('brandLogo');
+
+function updateThemeAssets(theme) {
+  if (!brandLogo) return;
+  brandLogo.src = theme === 'dark' ? 'copy_logo.png' : 'scroll_logo.png';
+}
+
+
 function renderFaqAccordion() {
   const container = document.getElementById('faqAccordion');
   if (!container) return;
