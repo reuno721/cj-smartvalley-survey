@@ -15,7 +15,7 @@
   --ghost-border: #c6d0dc;
   --notice-bg: #f8ecee;
   --notice-text: #8f2230;  
-  --notice-text2: #1362E4;
+  --notice-text2: #003285;
   --focus: #2b6797;
 }
 
@@ -148,7 +148,7 @@ h2 {
   margin: 0.8rem 0 0;
   color: var(--notice-text2);
   font-weight: 500;
-  font-size: 0.96rem;
+  font-size: 1rem;
 }
 
 .cta-card {
