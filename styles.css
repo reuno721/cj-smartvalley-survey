@@ -146,9 +146,9 @@ h2 {
 
 .notice-text2 {
   margin: 0.8rem 0 0;
-  color: var(--notice-text);
+  color: var(--notice-text2);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 }
 
 .cta-card {
