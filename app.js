@@ -4,6 +4,7 @@ const FORM_URL =
 const THEME_STORAGE_KEY = 'preferred-theme';
 const root = document.documentElement;
 const themeToggleButton = document.getElementById('themeToggle');
+const brandLogo = document.getElementById('brandLogo');
 
 const faqData = [
   {
@@ -64,8 +65,14 @@ function getSystemPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
+function updateThemeAssets(theme) {
+  if (!brandLogo) return;
+  brandLogo.src = theme === 'dark' ? 'copy_logo.png' : 'scroll_logo.png';
+}
+
 function setTheme(theme) {
   root.dataset.theme = theme;
+  updateThemeAssets(theme);
 
   if (themeToggleButton) {
     const isDark = theme === 'dark';
@@ -105,15 +112,6 @@ function bindVisitRequestLinks() {
   });
 }
 
-
-const brandLogo = document.getElementById('brandLogo');
-
-function updateThemeAssets(theme) {
-  if (!brandLogo) return;
-  brandLogo.src = theme === 'dark' ? 'copy_logo.png' : 'scroll_logo.png';
-}
-
-
 function renderFaqAccordion() {
   const container = document.getElementById('faqAccordion');
   if (!container) return;
@@ -152,4 +150,3 @@ function renderFaqAccordion() {
 initializeThemeToggle();
 bindVisitRequestLinks();
 renderFaqAccordion();
-
