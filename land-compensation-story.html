@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내 땅이 도로가 된다면? — 토지보상 쉽게 이해하기</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;overflow-y:scroll}
+body{font-family:'Noto Sans KR',sans-serif;background:#0D1B2A;color:#fff}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#2DD4BF,#3B82F6);width:0%;z-index:999;transition:width .2s}
+
+/* ── SLIDE NAV DOTS ── */
+#dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:998}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.3s}
+.dot.on{background:#2DD4BF;transform:scale(1.4)}
+
+/* ── SLIDES ── */
+.slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;position:relative;overflow:hidden}
+
+/* ── SLIDE THEMES ── */
+.s-dark{background:#0D1B2A}
+.s-blue{background:linear-gradient(160deg,#0D1B2A 0%,#0F3460 100%)}
+.s-teal{background:linear-gradient(160deg,#071A17 0%,#0A2420 100%)}
+.s-green{background:linear-gradient(160deg,#071A0F 0%,#081E12 100%)}
+.s-orange{background:linear-gradient(160deg,#180E06 0%,#211400 100%)}
+.s-purple{background:linear-gradient(160deg,#100820 0%,#190B35 100%)}
+.s-navy{background:linear-gradient(160deg,#0D1528 0%,#0A2240 100%)}
+.s-red{background:linear-gradient(160deg,#150606 0%,#1E0A0A 100%)}
+.s-end{background:linear-gradient(160deg,#0D2A26 0%,#0F3460 100%)}
+
+/* ── CONTENT WIDTHS ── */
+.content{max-width:720px;width:100%;text-align:center;position:relative;z-index:2}
+.content-left{max-width:720px;width:100%;text-align:left;position:relative;z-index:2}
+
+/* ── TYPOGRAPHY ── */
+.badge{display:inline-block;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.4);color:#2DD4BF;border-radius:20px;padding:5px 16px;font-size:13px;font-weight:500;margin-bottom:20px;letter-spacing:.5px}
+.badge-orange{background:rgba(251,146,60,.15);border-color:rgba(251,146,60,.4);color:#FB923C}
+.badge-purple{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.4);color:#A78BFA}
+.badge-yellow{background:rgba(250,204,21,.15);border-color:rgba(250,204,21,.4);color:#FACC15}
+
+h1.hero-title{font-size:clamp(32px,6vw,64px);font-weight:900;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+h2.slide-title{font-size:clamp(24px,4.5vw,44px);font-weight:700;line-height:1.2;letter-spacing:-.5px;margin-bottom:16px}
+.lead{font-size:clamp(15px,2.2vw,20px);color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:28px;font-weight:300}
+.highlight{color:#2DD4BF}
+.highlight-o{color:#FB923C}
+.highlight-y{color:#FACC15}
+
+/* ── VISUAL ELEMENTS ── */
+.big-icon{font-size:clamp(60px,12vw,110px);margin-bottom:20px;line-height:1}
+.big-num{font-size:clamp(48px,10vw,96px);font-weight:900;line-height:1;color:#2DD4BF}
+
+/* ── CARD GRID ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:24px}
+.vis-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px 16px;text-align:center}
+.vis-card .icon{font-size:32px;margin-bottom:10px}
+.vis-card h4{font-size:14px;font-weight:700;margin-bottom:6px;color:#fff}
+.vis-card p{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6}
+.vis-card.active-card{border-color:#2DD4BF;background:rgba(45,212,191,.08)}
+
+/* ── COMPARE BOXES ── */
+.compare-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
+.cbox{flex:1 1 200px;border-radius:14px;overflow:hidden}
+.cbox-head{padding:14px 18px;font-size:15px;font-weight:700}
+.cbox-body{padding:14px 18px}
+.cbox-body p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7}
+.cbox-body .num{font-size:26px;font-weight:900;margin-bottom:4px}
+
+/* ── PRINCIPLE PILLS ── */
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;justify-content:center}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:30px;padding:10px 18px;font-size:14px;font-weight:500;color:rgba(255,255,255,.85)}
+.pill span{color:#2DD4BF;font-weight:700;margin-right:6px}
+
+/* ── TIMELINE ── */
+.tl{display:flex;flex-direction:column;gap:0;margin-top:20px}
+.tl-row{display:flex;align-items:flex-start;gap:16px;padding:0 0 20px}
+.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:40px}
+.tl-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.tl-line{width:2px;flex:1;min-height:20px;background:rgba(255,255,255,.15);margin-top:4px}
+.tl-right{flex:1;padding-top:6px}
+.tl-right h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.tl-right p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6}
+.tl-right .days{display:inline-block;font-size:11px;background:rgba(255,255,255,.1);border-radius:8px;padding:1px 8px;margin-left:6px;color:rgba(255,255,255,.5)}
+
+/* ── STORY CALLOUT ── */
+.callout{background:rgba(45,212,191,.1);border-left:3px solid #2DD4BF;border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0;text-align:left}
+.callout p{font-size:14px;color:rgba(255,255,255,.85);line-height:1.75}
+
+/* ── VISUAL HOUSE ── */
+.scene{position:relative;margin:24px auto;width:280px;height:200px}
+.house-body{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:160px;height:100px;background:rgba(45,212,191,.25);border:2px solid rgba(45,212,191,.5);border-radius:4px 4px 0 0}
+.house-roof{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:90px solid transparent;border-right:90px solid transparent;border-bottom:60px solid rgba(45,212,191,.35)}
+.road-before{position:absolute;bottom:0;left:0;right:0;height:20px;background:rgba(100,100,100,.3);border-radius:4px}
+.road-after{position:absolute;bottom:0;left:0;right:0;height:20px;background:repeating-linear-gradient(90deg,rgba(251,146,60,.6) 0,rgba(251,146,60,.6) 30px,transparent 30px,transparent 60px);border-radius:4px}
+.excavator{position:absolute;right:10px;bottom:20px;font-size:36px}
+.money-fly{position:absolute;top:10px;right:20px;font-size:24px;animation:floatup 2s ease-in-out infinite}
+@keyframes floatup{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.arrow-road{position:absolute;bottom:20px;left:10px;font-size:20px;color:#FB923C}
+
+/* ── CHECK LIST ── */
+.checklist{list-style:none;text-align:left;margin-top:16px}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:rgba(255,255,255,.8);line-height:1.6}
+.checklist li .ck{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ── LIVESTOCK MINI ── */
+.animals{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.animal-tag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;text-align:center;font-size:12px}
+.animal-tag .e{font-size:22px;display:block;margin-bottom:3px}
+.animal-tag strong{display:block;font-weight:700;color:#fff;font-size:13px}
+.animal-tag span{color:rgba(255,255,255,.5)}
+
+/* ── CHOICE CARDS ── */
+.choice3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px}
+.choice3-card{border-radius:14px;padding:20px 16px;text-align:center}
+.choice3-card .icon{font-size:36px;margin-bottom:10px}
+.choice3-card h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.choice3-card p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* ── FORMULA VISUAL ── */
+.formula-visual{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px 0;font-size:clamp(13px,2vw,16px)}
+.fv-box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;text-align:center}
+.fv-box strong{display:block;font-size:clamp(11px,1.5vw,13px);color:rgba(255,255,255,.5);margin-bottom:2px;font-weight:400}
+.fv-box span{font-size:clamp(14px,2vw,17px);font-weight:700;color:#2DD4BF}
+.fv-op{font-size:20px;color:rgba(255,255,255,.4);font-weight:300}
+.fv-eq{font-size:24px;color:#FACC15;font-weight:700}
+
+/* ── SCROLL HINT ── */
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);text-align:center;color:rgba(255,255,255,.3);font-size:12px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-hint::before{content:'↓';display:block;font-size:20px;margin-bottom:4px}
+
+/* ── BG DECO ── */
+.bg-circle{position:absolute;border-radius:50%;pointer-events:none;opacity:.04}
+
+@media(max-width:600px){
+  #dots{display:none}
+  .tl{gap:0}
+  .compare-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="dots"></div>
+
+<!-- ========== SLIDE 0: 인트로 ========== -->
+<div class="slide s-dark" data-slide="0">
+  <div class="bg-circle" style="width:500px;height:500px;background:#2DD4BF;top:-150px;right:-150px"></div>
+  <div class="bg-circle" style="width:300px;height:300px;background:#3B82F6;bottom:-80px;left:-80px"></div>
+  <div class="content">
+    <div class="badge">공익사업 토지보상 안내</div>
+    <h1 class="hero-title">어느 날,<br>내 땅에<br><span class="highlight">도로가 생긴다면?</span></h1>
+    <p class="lead">갑자기 받은 공문 한 장.<br>당황하지 않도록, 처음부터 끝까지 쉽게 알려드립니다.</p>
+    <div style="color:rgba(255,255,255,.4);font-size:13px">스크롤을 내리며 읽어보세요</div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 1: 토지보상이란 ========== -->
+<div class="slide s-blue" data-slide="1">
+  <div class="content">
+    <div class="badge">토지보상이란?</div>
+    <h2 class="slide-title">국가가 내 땅을 가져갈 때<br><span class="highlight">반드시 돈을 줘야 합니다</span></h2>
+    <div class="scene">
+      <div class="house-body"></div>
+      <div class="house-roof"></div>
+      <div class="road-after"></div>
+      <div class="excavator">🚧</div>
+      <div class="money-fly">💰</div>
+      <div class="arrow-road">→</div>
+    </div>
+    <div class="callout">
+      <p>「공익사업을 위한 토지 등의 취득 및 보상에 관한 법률」에 의해<br>
+      도로·철도·학교·공공주택 등 공익사업에 내 토지가 편입되면<br>
+      <strong>사업시행자가 반드시 정당한 보상을 해야 합니다.</strong></p>
+    </div>
+    <div class="pill-row">
+      <div class="pill">🚫 <span>무보상</span> 절대 불가</div>
+      <div class="pill">⏰ <span>공사 전</span> 선지급 원칙</div>
+      <div class="pill">💵 <span>현금</span> 지급 원칙</div>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 2: 얼마나 받나? ========== -->
+<div class="slide s-navy" data-slide="2">
+  <div class="content">
+    <div class="badge">보상액 산정</div>
+    <h2 class="slide-title">토지 보상금은<br><span class="highlight">어떻게 계산하나요?</span></h2>
+    <p class="lead">감정평가사 2~3명이 독립적으로 평가한 금액의 <strong style="color:#fff">평균값</strong>으로 결정됩니다</p>
+    <div class="formula-visual">
+      <div class="fv-box"><strong>기준</strong><span>공시지가</span></div>
+      <div class="fv-op">×</div>
+      <div class="fv-box"><strong>시점보정</strong><span>지가변동률</span></div>
+      <div class="fv-op">×</div>
+      <div class="fv-box"><strong>지역요인</strong><span>입지·환경</span></div>
+      <div class="fv-op">×</div>
+      <div class="fv-box"><strong>개별요인</strong><span>형상·이용</span></div>
+      <div class="fv-eq">=</div>
+      <div class="fv-box" style="border-color:#2DD4BF;background:rgba(45,212,191,.1)"><strong>보상 단가</strong><span>최종 금액</span></div>
+    </div>
+    <div class="callout">
+      <p>💡 <strong>이것만 기억하세요</strong><br>
+      단순히 공시지가 = 보상금이 아닙니다.<br>
+      위치·형상·실제 이용 상황 등을 모두 반영해 평가하므로<br>
+      <strong>공시지가보다 높게</strong> 보상받는 경우가 많습니다.</p>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 3: 지장물이란? ========== -->
+<div class="slide s-teal" data-slide="3">
+  <div class="content">
+    <div class="badge">지장물보상</div>
+    <h2 class="slide-title">땅만 보상받는 게 아닙니다<br><span class="highlight">땅 위의 것도 보상됩니다</span></h2>
+    <p class="lead">토지 위에 있는 건물·나무·시설·농작물 등<br><strong style="color:#fff">'지장물'</strong>이라고 불리는 것들도 모두 보상 대상입니다</p>
+    <div class="card-grid">
+      <div class="vis-card active-card">
+        <div class="icon">🏠</div>
+        <h4>건축물</h4>
+        <p>집, 창고, 공장 등 지붕+기둥이 있는 건물</p>
+      </div>
+      <div class="vis-card active-card">
+        <div class="icon">🔧</div>
+        <h4>공작물</h4>
+        <p>담장, 석축, 상하수도 시설 등</p>
+      </div>
+      <div class="vis-card active-card">
+        <div class="icon">🌳</div>
+        <h4>수목</h4>
+        <p>나무, 과수, 관상수 등</p>
+      </div>
+      <div class="vis-card active-card">
+        <div class="icon">🌾</div>
+        <h4>농작물</h4>
+        <p>밭에 자라고 있는 작물</p>
+      </div>
+      <div class="vis-card active-card">
+        <div class="icon">⛩️</div>
+        <h4>분묘</h4>
+        <p>선조의 묘 (이전 비용 보상)</p>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 4: 이전비 vs 가격보상 ========== -->
+<div class="slide s-teal" data-slide="4">
+  <div class="content">
+    <div class="badge">지장물 보상 방법</div>
+    <h2 class="slide-title">지장물 보상의 원칙은<br><span class="highlight">"이사 비용"입니다</span></h2>
+    <div class="compare-row">
+      <div class="cbox" style="background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3)">
+        <div class="cbox-head" style="color:#2DD4BF">🚛 원칙 — 이전비 보상</div>
+        <div class="cbox-body">
+          <p>물건을 <strong style="color:#fff">다른 곳으로 옮기는 비용</strong>을 보상합니다<br><br>
+          집을 허물고 다시 짓는 것이 아니라<br>이사·이설·이식에 드는 실비</p>
+        </div>
+      </div>
+      <div class="cbox" style="background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.3)">
+        <div class="cbox-head" style="color:#FB923C">💰 예외 — 물건값 보상</div>
+        <div class="cbox-body">
+          <p>아래 경우엔 <strong style="color:#fff">물건 자체의 가격</strong>을 보상합니다<br><br>
+          ① 이전이 사실상 불가능한 경우<br>
+          ② 이전비 > 물건 가격인 경우<br>
+          ③ 국가가 직접 사용할 목적인 경우</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:20px">
+      <p>💡 무허가 건물은? — <strong>1989년 1월 24일</strong> 기준으로 달라집니다<br>
+      그 이전 무허가 → 합법 건물처럼 보상 ✔<br>
+      그 이후 무허가 → 이전비만 보상 (토지는 종전 이용 기준)</p>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 5: 영업하고 있다면 ========== -->
+<div class="slide s-orange" data-slide="5">
+  <div class="content">
+    <div class="badge badge-orange">영업보상</div>
+    <h2 class="slide-title">가게·사업체를 운영 중이라면<br><span class="highlight-o">영업 손실도 보상됩니다</span></h2>
+    <p class="lead">단, 사업인정고시일 이전부터 <strong style="color:#fff">허가 받아 합법적으로</strong> 운영 중이어야 합니다</p>
+    <div class="compare-row">
+      <div class="cbox" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)">
+        <div class="cbox-head" style="color:#F87171">🚫 폐업 보상</div>
+        <div class="cbox-body">
+          <div class="num" style="color:#F87171">2년치</div>
+          <p>다른 곳에서 영업 자체가 불가능한 경우<br><br>
+          <strong style="color:#fff">2년치 영업이익</strong> + 기계·재고 매각손실</p>
+        </div>
+      </div>
+      <div class="cbox" style="background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.3)">
+        <div class="cbox-head" style="color:#FB923C">⏸️ 휴업 보상</div>
+        <div class="cbox-body">
+          <div class="num" style="color:#FB923C">3개월치</div>
+          <p>이전하면 영업 가능하지만 쉬는 기간 발생 시<br><br>
+          <strong style="color:#fff">3개월 영업이익</strong> + 임대료 등 고정비용</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="border-color:#FB923C;background:rgba(251,146,60,.08);margin-top:16px">
+      <p>👔 <strong>직원이 있다면?</strong><br>
+      휴직 시: 평균임금의 <strong>70%</strong> × 최대 90일<br>
+      실직 시: 평균임금의 <strong>90일분</strong> 일괄 지급</p>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 6: 농사짓고 있다면 ========== -->
+<div class="slide s-green" data-slide="6">
+  <div class="content">
+    <div class="badge" style="background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.4);color:#4ADE80">농업보상</div>
+    <h2 class="slide-title">농사짓고 있다면<br><span style="color:#4ADE80">농작물 + 영농손실 따로 받습니다</span></h2>
+    <div class="card-grid" style="margin-top:20px">
+      <div class="vis-card" style="border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.08)">
+        <div class="icon">🌿</div>
+        <h4>농작물 보상</h4>
+        <p>지금 자라고 있는 작물 자체의 손실 보상</p>
+      </div>
+      <div class="vis-card" style="border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.08)">
+        <div class="icon">📅</div>
+        <h4>영농손실 보상</h4>
+        <p>농작물 보상과 <strong style="color:#fff">별도로</strong><br><span style="color:#4ADE80;font-weight:700">2년치</span> 영농손실 추가 지급</p>
+      </div>
+    </div>
+    <div style="margin-top:20px;font-size:14px;color:rgba(255,255,255,.6);text-align:left;background:rgba(255,255,255,.05);border-radius:12px;padding:16px">
+      <strong style="color:#fff;display:block;margin-bottom:10px">🐄 축산도 보상됩니다 — 기준 마릿수 이상이면</strong>
+      <div class="animals">
+        <div class="animal-tag"><span class="e">🐄</span><strong>소</strong><span>5마리+</span></div>
+        <div class="animal-tag"><span class="e">🐷</span><strong>돼지</strong><span>20마리+</span></div>
+        <div class="animal-tag"><span class="e">🐔</span><strong>닭</strong><span>200마리+</span></div>
+        <div class="animal-tag"><span class="e">🦆</span><strong>오리</strong><span>150마리+</span></div>
+        <div class="animal-tag"><span class="e">🐰</span><strong>토끼</strong><span>150마리+</span></div>
+        <div class="animal-tag"><span class="e">🐝</span><strong>꿀벌</strong><span>20군+</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 7: 이사가야 한다면 ========== -->
+<div class="slide s-purple" data-slide="7">
+  <div class="content">
+    <div class="badge badge-purple">이주대책</div>
+    <h2 class="slide-title">집을 비워야 한다면<br><span style="color:#A78BFA">3가지 중 하나를 선택합니다</span></h2>
+    <div class="choice3">
+      <div class="choice3-card" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)">
+        <div class="icon">🏘️</div>
+        <h4 style="color:#A78BFA">이주자택지</h4>
+        <p>사업시행자가 조성한 단지 내 주택지 분양</p>
+      </div>
+      <div class="choice3-card" style="background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3)">
+        <div class="icon">🏢</div>
+        <h4 style="color:#60A5FA">아파트 특별공급</h4>
+        <p>아파트 등 공동주택 특별 입주권 제공</p>
+      </div>
+      <div class="choice3-card" style="background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.3)">
+        <div class="icon">💵</div>
+        <h4 style="color:#FACC15">이주정착금</h4>
+        <p>주거용 건축물 평가액의 <strong>30%</strong><br>(최소 1,200만 ~ 최대 2,400만원)</p>
+      </div>
+    </div>
+    <div class="callout" style="border-color:#A78BFA;background:rgba(167,139,250,.08);margin-top:20px">
+      <p>✅ 위 3가지와 <strong>별도로</strong> 이것도 받습니다<br>
+      👤 <strong>가옥주</strong>: 가구원수에 따라 <strong>2개월치</strong> 주거이전비 + 이사비<br>
+      👥 <strong>세입자</strong>: 3개월 이상 거주 시 <strong>4개월치</strong> 주거이전비 + 이사비</p>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 8: 세금 혜택 ========== -->
+<div class="slide s-navy" data-slide="8">
+  <div class="content">
+    <div class="badge badge-yellow">세금 혜택</div>
+    <h2 class="slide-title">보상받을 때<br><span class="highlight-y">세금 혜택도 있습니다</span></h2>
+    <ul class="checklist">
+      <li><span class="ck">🌾</span><div>8년 이상 직접 농사지은 농지 → <strong style="color:#FACC15">양도세 100% 감면</strong> (1억 한도)</div></li>
+      <li><span class="ck">🏠</span><div>1세대 1주택 및 부속토지 → <strong style="color:#FACC15">완전 비과세</strong></div></li>
+      <li><span class="ck">🔄</span><div>보상금으로 다른 토지·건물 취득 시 (1년 내) → <strong style="color:#FACC15">취득세·등록세 비과세</strong></div></li>
+      <li><span class="ck">🌱</span><div>사업지구 농지 팔고 외부 농지 대토 시 → <strong style="color:#FACC15">양도세 100% 감면</strong></div></li>
+    </ul>
+    <div class="callout" style="border-color:#FACC15;background:rgba(250,204,21,.06);margin-top:16px">
+      <p>⚠️ 세금은 개인 상황마다 다릅니다.<br>구체적인 내용은 <strong>관할 세무서 또는 세무사</strong>에게 꼭 확인하세요.</p>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 9: 전체 절차 ========== -->
+<div class="slide s-red" data-slide="9">
+  <div class="content-left" style="max-width:680px">
+    <div style="text-align:center;margin-bottom:20px">
+      <div class="badge" style="background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.4);color:#F87171">보상 절차</div>
+      <h2 class="slide-title" style="text-align:center">처음부터 끝까지<br><span style="color:#F87171">13단계, 약 15개월</span></h2>
+    </div>
+    <div class="tl">
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#1D4ED8">1-2</div><div class="tl-line"></div></div><div class="tl-right"><h4>지구 지정 → 주민 의견 수렴</h4><p>공람·공고, 개발예정지구 공식 지정</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#1D4ED8">3</div><div class="tl-line"></div></div><div class="tl-right"><h4>기본조사 · 지적공부 발급<span class="days">30~40일</span></h4><p>등기부등본, 토지대장 등 모든 서류 수집</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#1565C0">4</div><div class="tl-line"></div></div><div class="tl-right"><h4>🔴 사업인정 고시</h4><p>이 시점이 보상 기준점 — 이후 취득 토지는 불이익</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#1565C0">5</div><div class="tl-line"></div></div><div class="tl-right"><h4>물건 조사 · 조서 작성<span class="days">80~90일</span></h4><p>현장 실측, 건물·나무·농작물 등 전수 조사</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#0D6EAC">6</div><div class="tl-line"></div></div><div class="tl-right"><h4>보상계획 공고 · 이의신청<span class="days">20~30일</span></h4><p>신문 공고 + 개별통지, 이의 있으면 14일 내 신청</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#0D6EAC">7</div><div class="tl-line"></div></div><div class="tl-right"><h4>보상협의회 개최<span class="days">30일</span></h4><p>주민 의견 수렴 및 잔여지 매수 심사</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#0E7C6A">8</div><div class="tl-line"></div></div><div class="tl-right"><h4>감정평가 · 보상액 산정<span class="days">30~40일</span></h4><p>감정평가사 2~3인 평가 → 평균값이 보상액</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#0E7C6A">9</div><div class="tl-line"></div></div><div class="tl-right"><h4>협의 · 계약체결<span class="days">40일</span></h4><p>30일 이상 협의 → 합의되면 계약 후 보상금 지급 ✔</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#0E7C6A">10</div><div class="tl-line"></div></div><div class="tl-right"><h4>이주대책 신청 · 처리<span class="days">30일</span></h4><p>이주자택지·특별공급·이주정착금 중 선택 신청</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#7C3AED">11</div><div class="tl-line"></div></div><div class="tl-right"><h4>협의 불성립 → 재결신청<span class="days">120~150일</span></h4><p>토지수용위원회에서 강제 결정 (약 4~5개월)</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#7C3AED">12</div><div class="tl-line"></div></div><div class="tl-right"><h4>재결 보상금 지급 · 공탁<span class="days">60일</span></h4><p>미수령 시 법원 공탁 → 국가가 땅 취득</p></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-circle" style="background:#DC2626">13</div></div><div class="tl-right"><h4>지장물 철거 · 행정대집행<span class="days">60~90일</span></h4><p>자진 철거 안 하면 강제 대집행 (약 1개월 계고 후)</p></div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<!-- ========== SLIDE 10: 마무리 ========== -->
+<div class="slide s-end" data-slide="10">
+  <div class="content">
+    <div class="big-icon">📋</div>
+    <div class="badge">핵심 요약</div>
+    <h2 class="slide-title">이것만 기억하세요</h2>
+    <ul class="checklist" style="text-align:left;max-width:500px;margin:0 auto">
+      <li><span class="ck">✅</span><div>토지·건물·나무·농작물 <strong style="color:#2DD4BF">모두 보상 대상</strong></div></li>
+      <li><span class="ck">✅</span><div>보상금 = 공시지가 그대로가 아닌 <strong style="color:#2DD4BF">감정평가 금액</strong></div></li>
+      <li><span class="ck">✅</span><div>영업 손실, 농업 손실, 이사비까지 <strong style="color:#2DD4BF">따로 추가 보상</strong></div></li>
+      <li><span class="ck">✅</span><div>이주 방법은 <strong style="color:#2DD4BF">3가지 중 내가 선택</strong></div></li>
+      <li><span class="ck">✅</span><div>세금 감면 혜택 꼭 확인 (세무사 상담 권장)</div></li>
+      <li><span class="ck">✅</span><div>공사 시작 <strong style="color:#2DD4BF">전에</strong> 반드시 보상금 먼저 지급</div></li>
+    </ul>
+    <div style="margin-top:32px;padding:20px;background:rgba(255,255,255,.05);border-radius:14px;font-size:13px;color:rgba(255,255,255,.4);line-height:1.7">
+      본 자료는 이해를 돕기 위한 안내용입니다.<br>실제 보상은 사업시행자·감정평가사·관할 기관과 확인하시기 바랍니다.
+    </div>
+  </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const prog = document.getElementById('prog');
+
+slides.forEach((_,i)=>{
+  const d = document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'});
+  dotsEl.appendChild(d);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const i = [...slides].indexOf(e.target);
+      dots.forEach((d,j)=>d.classList.toggle('on',j===i));
+      prog.style.width = ((i+1)/slides.length*100)+'%';
+    }
+  });
+},{threshold:.5});
+
+slides.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
