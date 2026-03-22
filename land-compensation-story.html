@@ -23,11 +23,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:#0D1B2A;color:#fff}
 .s-orange{background:linear-gradient(160deg,#180E06 0%,#211400 100%)}
 .s-purple{background:linear-gradient(160deg,#100820 0%,#190B35 100%)}
 .s-navy{background:linear-gradient(160deg,#0D1528 0%,#0A2240 100%)}
-.s-red{background:linear-gradient(160deg,#150606 0%,#1E0A0A 100%)}
+.s-proc{background:#0D1B2A}
 .s-end{background:linear-gradient(160deg,#0D2A26 0%,#0F3460 100%)}
 
 .content{max-width:760px;width:100%;text-align:center;position:relative;z-index:2}
-.content-left{max-width:780px;width:100%;text-align:left;position:relative;z-index:2}
+.content-left{max-width:800px;width:100%;text-align:left;position:relative;z-index:2}
 
 .badge{display:inline-block;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.4);color:#2DD4BF;border-radius:20px;padding:7px 22px;font-size:16px;font-weight:500;margin-bottom:22px;letter-spacing:.5px}
 .badge-orange{background:rgba(251,146,60,.15);border-color:rgba(251,146,60,.4);color:#FB923C}
@@ -99,9 +99,9 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
 .step-list{display:flex;flex-direction:column;gap:12px}
 .step-item{display:flex;align-items:flex-start;gap:12px}
 .step-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:7px}
-.step-item h5{font-size:clamp(15px,1.8vw,18px);font-weight:700;color:#fff;margin-bottom:3px}
-.step-item p{font-size:clamp(13px,1.5vw,16px);color:rgba(255,255,255,.52);line-height:1.6}
-.step-days{display:inline-block;font-size:12px;background:rgba(255,255,255,.1);border-radius:8px;padding:1px 8px;margin-left:6px;color:rgba(255,255,255,.5)}
+.step-item h5{font-size:clamp(15px,1.8vw,17px);font-weight:700;color:#fff;margin-bottom:3px}
+.step-item p{font-size:clamp(12px,1.4vw,14px);color:rgba(255,255,255,.5);line-height:1.55}
+.step-days{display:inline-block;font-size:11px;background:rgba(255,255,255,.1);border-radius:8px;padding:1px 7px;margin-left:5px;color:rgba(255,255,255,.45)}
 
 .disc{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:clamp(11px,1.2vw,13px);color:rgba(255,255,255,.3);padding:0 20px;z-index:3;line-height:1.5}
 
@@ -301,7 +301,11 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
     <div class="compare-row" style="margin-top:10px">
       <div class="cbox" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3)">
         <div class="cbox-head" style="color:#4ADE80">🌿 농작물 보상</div>
-        <div class="cbox-body"><p>지금 자라고 있는<br>작물 자체의 손실 보상</p></div>
+        <div class="cbox-body">
+          <div style="font-size:clamp(52px,7vw,72px);margin-bottom:8px;line-height:1">🌾</div>
+          <p>지금 자라고 있는<br>작물 자체의 손실 보상</p>
+          <p style="margin-top:12px;font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,.38)">파종기·성장기·수확기<br>단계별로 평가합니다</p>
+        </div>
       </div>
       <div class="cbox" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3)">
         <div class="cbox-head" style="color:#4ADE80">📅 영농손실 보상</div>
@@ -336,7 +340,7 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
       <div class="choice3-card" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)">
         <div class="icon">🏘️</div>
         <h4 style="color:#A78BFA">① 이주자택지</h4>
-        <p>사업시행자가 조성한<br> 특정 단지 내의<br>단독주택지 분양</p>
+        <p>사업시행자가 조성한<br>특정 단지 내의<br>단독주택지 분양</p>
       </div>
       <div class="choice3-card" style="background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.3)">
         <div class="icon">🏢</div>
@@ -346,7 +350,7 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
       <div class="choice3-card" style="background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.3)">
         <div class="icon">💵</div>
         <h4 style="color:#FACC15">③ 이주정착금</h4>
-        <p>주거용 건축물 평가액의 <strong>30% 수준으로</strong><br>최소 1,200만 ~<br> 최대 2,400만원</p>
+        <p>주거용 건축물 평가액의 <strong>30% 수준으로</strong><br>최소 1,200만 ~<br>최대 2,400만원</p>
       </div>
     </div>
     <div class="callout" style="border-color:#A78BFA;background:rgba(167,139,250,.08);margin-top:22px">
@@ -379,7 +383,7 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
 </div>
 
 <!-- ===== 9: 보상 절차 ===== -->
-<div class="slide s-red" data-slide="9">
+<div class="slide s-proc" data-slide="9">
   <div class="content-left" style="max-width:800px">
     <div style="text-align:center;margin-bottom:22px">
       <div class="badge" style="background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.4);color:#F87171">보상 절차</div>
@@ -395,7 +399,7 @@ h2.slide-title{font-size:clamp(30px,5.5vw,56px);font-weight:700;line-height:1.2;
         <div class="step-list">
           <div class="step-item"><div class="step-dot" style="background:#60A5FA"></div><div><h5>지구 지정 · 주민 의견 수렴</h5><p>공람·공고, 개발예정지구 공식 지정</p></div></div>
           <div class="step-item"><div class="step-dot" style="background:#60A5FA"></div><div><h5>기본조사 · 서류 수집 <span class="step-days">30~40일</span></h5><p>등기부등본, 토지대장 등 모든 서류 수집</p></div></div>
-          <div class="step-item"><div class="step-dot" style="background:#F87171"></div><div><h5>🔴 사업인정 고시</h5><p>이 날짜가 보상 기준점 — 이후 취득 토지는 불이익</p></div></div>
+          <div class="step-item"><div class="step-dot" style="background:#F87171"></div><div><h5>사업인정 고시 <span class="step-days" style="color:#F87171;background:rgba(248,113,113,.15)">기준일</span></h5><p>보상 산정 기준점 — 이후 취득 토지는 불이익</p></div></div>
         </div>
       </div>
       <div class="phase-card" style="border-color:rgba(45,212,191,.4)">
